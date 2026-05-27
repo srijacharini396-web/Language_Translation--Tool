@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Language Translation Tool</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 550px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            margin-top: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            background-color: #3451c7;
+        }
+
+        .result {
+            margin-top: 20px;
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🌍 Language Translation Tool</h1>
+
+        <form method="POST">
+
+            <label>Enter Text:</label>
+
+            <textarea name="text" rows="5" required></textarea>
+
+            <br><br>
+
+            <label>Source Language:</label>
+
+            <select name="source_language">
+
+                <option value="auto">Auto Detect</option>
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="te">Telugu</option>
+                <option value="ta">Tamil</option>
+                <option value="ml">Malayalam</option>
+                <option value="kn">Kannada</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="es">Spanish</option>
+                <option value="ja">Japanese</option>
+                <option value="ko">Korean</option>
+                <option value="zh-CN">Chinese</option>
+                <option value="ar">Arabic</option>
+                <option value="ru">Russian</option>
+                <option value="it">Italian</option>
+                <option value="pt">Portuguese</option>
+
+            </select>
+
+            <br><br>
+
+            <label>Target Language:</label>
+
+            <select name="target_language">
+
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="te">Telugu</option>
+                <option value="ta">Tamil</option>
+                <option value="ml">Malayalam</option>
+                <option value="kn">Kannada</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="es">Spanish</option>
+                <option value="ja">Japanese</option>
+                <option value="ko">Korean</option>
+                <option value="zh-CN">Chinese</option>
+                <option value="ar">Arabic</option>
+                <option value="ru">Russian</option>
+                <option value="it">Italian</option>
+                <option value="pt">Portuguese</option>
+
+            </select>
+
+            <button type="submit">
+                Translate
+            </button>
+
+        </form>
+
+        {% if translated_text %}
+
+        <div class="result">
+
+            <h3>Translated Text:</h3>
+
+            <p id="translatedText">
+                {{ translated_text }}
+            </p>
+
+            <button onclick="copyText()">
+                Copy Text
+            </button>
+
+            {% if audio_file %}
+
+            <audio controls autoplay>
+                <source src="{{ audio_file }}" type="audio/mpeg">
+            </audio>
+
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <script>
+
+        function copyText() {
+
+            var text =
+            document.getElementById("translatedText").innerText;
+
+            navigator.clipboard.writeText(text);
+
+            alert("Translated text copied!");
+
+        }
+
+    </script>
+
+</body>
+
+</html>
